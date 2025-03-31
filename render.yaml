@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nebulapdf-backend
+    env: docker
+    buildCommand: docker build -t nebulapdf-backend .
+    startCommand: docker run -p $PORT:8080 nebulapdf-backend
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PDF_API_KEY
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_S3_REGION
+        sync: false
+      - key: AWS_S3_BUCKET
+        sync: false 
