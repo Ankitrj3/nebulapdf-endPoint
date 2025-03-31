@@ -163,3 +163,197 @@ nebulapdf-endPoint/
 - PDF.co API client
 - Google Gemini API client
 
+- ### POST /api/upload/file
+Upload PDF file to AWS S3
+
+**Request:**
+- Method: POST
+- URL: `http://localhost:8080/api/upload/file`
+- Content-Type: `multipart/form-data`
+
+**Request Body:**
+- Key: `file`
+- Type: File
+- Value: Select your PDF file (e.g., AnkitImpCV.pdf)
+
+**Example using Postman:**
+1. Open Postman and create a new request
+2. Set the request method to `POST`
+3. Enter the URL: `http://localhost:8080/api/upload/file`
+4. In the request body:
+   - Select "form-data"
+   - Add a key named "file"
+   - Click the dropdown on the right of the key field and select "File"
+   - Click "Select Files" and choose your PDF file
+5. Click "Send" to make the request
+
+**Expected Response:**
+```json
+{
+    "message": "File uploaded successfully",
+    "fileUrl": "https://your-bucket.s3.region.amazonaws.com/filename.pdf"
+}
+```
+
+## AWS S3 Configuration
+
+To use the S3 file upload functionality, you need to configure AWS credentials in your `application.properties` file. Here's how to set it up:
+
+1. Log in to your AWS Management Console
+2. Go to IAM (Identity and Access Management)
+3. Create a new IAM user or select an existing one
+4. Attach the following policies to the user:
+   - `AmazonS3FullAccess` (or create a custom policy with specific bucket access)
+5. Generate access keys for the user:
+   - Go to the user's security credentials
+   - Click "Create access key"
+   - Save the Access Key ID and Secret Access Key
+
+6. Add the following properties to your `application.properties`:
+```properties
+# AWS S3 Configuration
+aws.access.key.id=your_access_key_id
+aws.secret.access.key=your_secret_access_key
+aws.s3.region=your_region
+aws.s3.bucket=your_bucket_name
+```
+
+Replace the following:
+- `your_access_key_id`: Your AWS Access Key ID
+- `your_secret_access_key`: Your AWS Secret Access Key
+- `your_region`: Your S3 bucket region (e.g., us-east-1)
+- `your_bucket_name`: Your S3 bucket name
+
+**Note:** For security reasons, it's recommended to use environment variables instead of hardcoding these values. You can set them as:
+```bash
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+export AWS_S3_REGION=your_region
+export AWS_S3_BUCKET=your_bucket_name
+```
+
+Then in your `application.properties`, use:
+```properties
+aws.access.key.id=${AWS_ACCESS_KEY_ID}
+aws.secret.access.key=${AWS_SECRET_ACCESS_KEY}
+aws.s3.region=${AWS_S3_REGION}
+aws.s3.bucket=${AWS_S3_BUCKET}
+```
+
+## Project Structure
+
+```
+nebulapdf-endPoint/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── nebula/
+│   │   │           └── pdf/
+│   │   │               ├── controller/
+│   │   │               ├── service/
+│   │   │               └── entity/
+│   │   └── resources/
+│   │       └── application.properties
+│   └── test/
+├── pom.xml
+└── README.md
+```
+
+## Technologies Used
+
+- Spring Boot
+- PDF.co API for PDF processing
+- Google Gemini API for text summarization
+- Maven for dependency management
+- Java 17+
+- RESTful API design
+
+## Dependencies
+
+- Spring Boot Starter Web
+- Spring Boot Starter Test
+- Jackson for JSON processing
+- PDF.co API client
+- Google Gemini API client
+
+
+## POST /api/upload/file
+Upload PDF file to AWS S3
+
+**Request:**
+- Method: POST
+- URL: `http://localhost:8080/api/upload/file`
+- Content-Type: `multipart/form-data`
+
+**Request Body:**
+- Key: `file`
+- Type: File
+- Value: Select your PDF file (e.g., AnkitImpCV.pdf)
+
+**Example using Postman:**
+1. Open Postman and create a new request
+2. Set the request method to `POST`
+3. Enter the URL: `http://localhost:8080/api/upload/file`
+4. In the request body:
+   - Select "form-data"
+   - Add a key named "file"
+   - Click the dropdown on the right of the key field and select "File"
+   - Click "Select Files" and choose your PDF file
+5. Click "Send" to make the request
+
+**Expected Response:**
+```json
+{
+    "message": "File uploaded successfully",
+    "fileUrl": "https://your-bucket.s3.region.amazonaws.com/filename.pdf"
+}
+```
+
+## AWS S3 Configuration
+
+To use the S3 file upload functionality, you need to configure AWS credentials in your `application.properties` file. Here's how to set it up:
+
+1. Log in to your AWS Management Console
+2. Go to IAM (Identity and Access Management)
+3. Create a new IAM user or select an existing one
+4. Attach the following policies to the user:
+   - `AmazonS3FullAccess` (or create a custom policy with specific bucket access)
+5. Generate access keys for the user:
+   - Go to the user's security credentials
+   - Click "Create access key"
+   - Save the Access Key ID and Secret Access Key
+
+6. Add the following properties to your `application.properties`:
+```properties
+# AWS S3 Configuration
+aws.access.key.id=your_access_key_id
+aws.secret.access.key=your_secret_access_key
+aws.s3.region=your_region
+aws.s3.bucket=your_bucket_name
+```
+
+Replace the following:
+- `your_access_key_id`: Your AWS Access Key ID
+- `your_secret_access_key`: Your AWS Secret Access Key
+- `your_region`: Your S3 bucket region (e.g., us-east-1)
+- `your_bucket_name`: Your S3 bucket name
+
+**Note:** For security reasons, it's recommended to use environment variables instead of hardcoding these values. You can set them as:
+```bash
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+export AWS_S3_REGION=your_region
+export AWS_S3_BUCKET=your_bucket_name
+```
+
+Then in your `application.properties`, use:
+```properties
+aws.access.key.id=${AWS_ACCESS_KEY_ID}
+aws.secret.access.key=${AWS_SECRET_ACCESS_KEY}
+aws.s3.region=${AWS_S3_REGION}
+aws.s3.bucket=${AWS_S3_BUCKET}
+```
+
+<img width="1470" alt="Screenshot 2025-03-31 at 6 17 03 PM" src="https://github.com/user-attachments/assets/2aed2502-537f-4275-a4cc-c8f7a4b9619d" />
+
